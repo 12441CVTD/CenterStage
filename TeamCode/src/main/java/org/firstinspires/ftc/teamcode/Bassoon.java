@@ -28,7 +28,6 @@ package org.firstinspires.ftc.teamcode;///* Copyright (c) 2017 FIRST. All rights
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -51,7 +50,7 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 @TeleOp(name="usage ONBOT1, please use", group="Linear OpMode")
-public class ContraBassoon extends LinearOpMode {
+public class Bassoon extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
