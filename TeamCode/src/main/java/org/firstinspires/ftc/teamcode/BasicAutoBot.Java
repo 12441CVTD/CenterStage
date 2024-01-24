@@ -1,4 +1,3 @@
-//R
 /* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -28,10 +27,9 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.robotcontroller.external.samples;
+package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -55,58 +53,37 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
-
-@Autonomous(name="RIGHT REThis is for idiot babies", group="Robot")
-
-public class RedRightAuto extends LinearOpMode {
+@Disabled
+@Autonomous(name="This is for idiot babies", group="Robot")
+public class BasicAutoBot extends LinearOpMode {
 
     /* Declare OpMode members. */
     private DcMotor fL = null;
     private DcMotor fR = null;
     private DcMotor bL = null;
     private DcMotor bR = null;
-    private Servo claw = null;
-    private Servo flippyL = null;
-    private Servo flippyR = null;
-    //private Servo turnyL = null;
-    private Servo turnyR = null;
-    private DcMotor armL = null;
-    private DcMotor armR = null;
-    private Servo woosh = null;
-    private ElapsedTime     runtime = new ElapsedTime();
+    private ElapsedTime runtime = new ElapsedTime();
 
     @Override
     public void runOpMode() {
 
         // Initialize the drive system variables.
         fL  = hardwareMap.get(DcMotor.class, "fL");
-        fR = hardwareMap.get(DcMotor.class, "fR");
+        fR  = hardwareMap.get(DcMotor.class, "fR");
         bL  = hardwareMap.get(DcMotor.class, "bL");
-        bR = hardwareMap.get(DcMotor.class, "bR");
-        claw = hardwareMap.get(Servo.class, "claw");
-        flippyL = hardwareMap.get(Servo.class, "flippyL");
-        flippyR = hardwareMap.get(Servo.class, "flippyR");
-        //turnyL = hardwareMap.get(Servo.class, "turnyL");
-        turnyR = hardwareMap.get(Servo.class, "turnyR");
-        armL = hardwareMap.get(DcMotor.class, "armL");
-        armR = hardwareMap.get(DcMotor.class, "armR");
-        woosh = hardwareMap.get(Servo.class, "woosh");
+        bR  = hardwareMap.get(DcMotor.class, "bR");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        fL.setDirection(DcMotor.Direction.FORWARD);
+        fL.setDirection(DcMotor.Direction.REVERSE);
         fR.setDirection(DcMotor.Direction.FORWARD);
-        bL.setDirection(DcMotor.Direction.FORWARD);
+        bL.setDirection(DcMotor.Direction.REVERSE);
         bR.setDirection(DcMotor.Direction.FORWARD);
-        armL.setDirection(DcMotor.Direction.REVERSE);
-        armR.setDirection(DcMotor.Direction.FORWARD);
         fL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        armL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        armR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
@@ -114,15 +91,14 @@ public class RedRightAuto extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        driveWay(0.6,-0.6,-0.6,0.6, 1500);
-        driveWay(-0.4,0.4,0.4,-0.4, 600);
-//front left, back right, positive right
+        driveWay(0.3,0.3,0.3,0.3, 1000);
+
         fL.setPower(0);
         fR.setPower(0);
         bL.setPower(0);
         bR.setPower(0);
     }
-    public void driveWay(double lF, double rF, double lB, double rB, double s){
+    public void driveWay(double lF, double rF, double lB, double rB, int s){
         runtime.reset();
         while(opModeIsActive() && (runtime.milliseconds() < s)){
             fL.setPower(lF);
@@ -154,7 +130,7 @@ private DcMotor br = null;
   @Override
     public void runOpMode() {
 fl = hardwareMap.get(DcMotor.class "fl");
-fr = hardwareMap.get(DcMotor.class "fr")
+fr = hardwareMap.get(DcMotor.class "fr");
 bl = hardwareMap.get(DcMotor.class "bl");
 br = hardwareMap.get(DcMotor.class "br");
 
@@ -163,5 +139,8 @@ leftDrive.setDirection(DcMotor.Direction.REVERSE);
 
  telemetry.addData("Status", "Ready to run");    
         telemetry.update();
+
+waitForStart();
+
 
 }*/
