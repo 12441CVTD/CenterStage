@@ -1,4 +1,3 @@
-package org.firstinspires.ftc.teamcode;///* Copyright (c) 2017 FIRST. All rights reserved.
 /* Copyright (c) 2017 FIRST. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -28,6 +27,9 @@ package org.firstinspires.ftc.teamcode;///* Copyright (c) 2017 FIRST. All rights
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -49,7 +51,7 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="usage ONBOT1, please use", group="Linear OpMode")
+@TeleOp(name="usage 1, please DON'T use", group="Linear OpMode")
 public class Bassoon extends LinearOpMode {
 
     // Declare OpMode members.
@@ -135,6 +137,12 @@ public class Bassoon extends LinearOpMode {
             fRp = Range.clip(drive - turn - strafe, -1.0, 1.0);
             bLp = Range.clip(drive + turn - strafe, -1.0, 1.0);
             bRp = Range.clip(drive - turn + strafe, -1.0, 1.0);
+
+            //battery done. last resort
+            // fL.setPower(Range.clip(drive + turn + strafe, -1.0, 1.0));
+            // fR.setPower(Range.clip(drive - turn - strafe, -1.0, 1.0));
+            // bL.setPower(Range.clip(drive + turn - strafe, -1.0, 1.0));
+            // bR.setPower(Range.clip(drive - turn + strafe, -1.0, 1.0));
             if(gamepad1.left_trigger > 0.5 && gamepad1.right_trigger < 0.5){
                 // fLp = Range.clip(drive + turn + strafe + 1.0, -1.0, 1.0);
                 // fLp = Range.clip(drive + turn - strafe - 1.0, -1.0, 1.0);
@@ -142,56 +150,80 @@ public class Bassoon extends LinearOpMode {
                 fRp = 0.85;
                 bLp = 0.85;
                 bRp = -0.85;
+                // fL.setPower(-0.85);
+                // fR.setPower(0.85);
+                // bL.setPower(0.85);
+                // bR.setPower(-0.85);
             }
             else if(gamepad1.left_trigger < 0.5 && gamepad1.right_trigger > 0.5){
                 fLp = 0.85;
                 fRp = -0.85;
                 bLp = -0.85;
                 bRp = 0.85;
+                // fL.setPower(0.85);
+                // fR.setPower(-0.85);
+                // bL.setPower(-0.85);
+                // bR.setPower(0.85);
             }
             if(gamepad1.dpad_up){
                 fLp = 0.3;
                 fRp = 0.3;
                 bLp = 0.3;
                 bRp = 0.3;
+                // fL.setPower(0.3);
+                // fR.setPower(0.3);
+                // bL.setPower(0.3);
+                // bR.setPower(0.3);
             }
             else if(gamepad1.dpad_right){
-                fLp = 0.3;
-                fRp = -0.3;
-                bLp = 0.3;
-                bRp = -0.3;
+                // fLp = 0.3;
+                // fRp = -0.3;
+                // bLp = 0.3;
+                // bRp = -0.3;
+                fL.setPower(0.3);
+                fR.setPower(-0.3);
+                bL.setPower(-0.3);
+                bR.setPower(0.3);
             }
             else if(gamepad1.dpad_left){
                 fLp = -0.3;
                 fRp = 0.3;
                 bLp = -0.3;
                 bRp = 0.3;
+                // fL.setPower(-0.3);
+                // fR.setPower(0.3);
+                // bL.setPower(0.3);
+                // bR.setPower(-0.3);
             }
             else if(gamepad1.dpad_down){
                 fLp = -0.3;
                 fRp = -0.3;
                 bLp = -0.3;
                 bRp = -0.3;
+                // fL.setPower(-0.3);
+                // fR.setPower(-0.3);
+                // bL.setPower(-0.3);
+                // bR.setPower(-0.3);
             }
             if(gamepad2.dpad_up && flipped){
-                armLP = 0.5;
-                armRP = 0.5;
+                armLP = 0.85;
+                armRP = 0.85;
             }
             else if(gamepad2.dpad_down){
-                armLP = -0.5;
-                armRP = -0.5;
+                armLP = -0.85;
+                armRP = -0.85;
             }
             if(gamepad2.x && !open){//flipped
-                flippyL.setPosition(0.18);//0.2
-                flippyR.setPosition(0.82);//0.8
+                flippyL.setPosition(0.25);//0.2
+                flippyR.setPosition(0.75);//0.8
                 flipped = true;
                 //turnyL.setPosition(0.15);//placing
-                turnyR.setPosition(0.8);  //change value to better angle
+                turnyR.setPosition(0.83);  //change value to better angle
                 turned = true;
             }
             else if(gamepad2.y && !open){//starting position
-                flippyL.setPosition(0.88);//0.89
-                flippyR.setPosition(0.12);//0.11
+                flippyL.setPosition(0.95);//0.89
+                flippyR.setPosition(0.05);//0.11
                 flipped = false;
                 //turnyL.setPosition(0.5);//floor level
                 turnyR.setPosition(0.51);
@@ -213,12 +245,9 @@ public class Bassoon extends LinearOpMode {
                 turned = true;
             }*/
             if(gamepad2.left_trigger > 0.5 && !open){//suspend
-                flippyL.setPosition(0.6);
-                flippyR.setPosition(0.3);
-                turnyR.setPosition(0.3);
-
+                turnyR.setPosition(0.0);
             }
-            if(gamepad2.a && runtime.seconds() > 120){//airplane, should be 120 seconds for endgame
+            if(gamepad2.a /*&& runtime.seconds() > 0*/){//airplane, should be 120 seconds for endgame
                 woosh.setPosition(0.8);
             }
             if(gamepad1.a && gamepad1.b && gamepad1.x && gamepad1.y && gamepad2.a && gamepad2.b && gamepad2.x && gamepad2.y){
@@ -245,80 +274,3 @@ public class Bassoon extends LinearOpMode {
         }
     }
 }
-//
-////Odometry code:
-////(change stuff ben)
-//
-//package org.firstinspires.ftc.teamcode.odometry
-//
-//interface Odometry {
-//    fun setAngleRad(angle_rad: Double)
-//    fun addAngleBias(angle_rad: Double)
-//}
-//
-////THREE WHEEL ODOMETRY TYPE BEAT (taken from some random place dont even worry about it) SHOWN BELOW:
-//
-//package org.firstinspires.ftc.teamcode.odometry
-//
-//import org.firstinspires.ftc.teamcode.field.*
-//import org.firstinspires.ftc.teamcode.movement.*
-//import org.firstinspires.ftc.teamcode.movement.basicDriveFunctions.*
-//
-//object ThreeWheel : Odometry{
-//        var yTraveled=0.0
-//        var xTraveled=0.0
-//        var degTraveled=0.0
-//
-//// last encoder positions
-//private var last_l_encoder=0
-//private var last_r_encoder=0
-//private var last_a_encoder=0
-//
-//        // used for reading angle absolutely not integrated
-//        var angleRadBias=0.0
-//
-//private var lastRawAngle=0.0
-//
-//        fun update(curr_l_encoder:Int,curr_r_encoder:Int,curr_a_encoder:Int,leftInchesPerTick:Double,rightInchesPerTick:Double,auxInchesPerTick:Double,turnTrackWidth:Double,auxTrackWidth:Double){
-//        DrivePosition.odometer=this
-//
-//        val lWheelDelta=(curr_l_encoder-last_l_encoder)*leftInchesPerTick
-//        val rWheelDelta=(curr_r_encoder-last_r_encoder)*rightInchesPerTick
-//        val aWheelDelta=(curr_a_encoder-last_a_encoder)*auxInchesPerTick
-//
-//
-//        // calculate angle change for running arc integration and aux prediction
-//        val angleIncrement=(lWheelDelta-rWheelDelta)/turnTrackWidth
-//
-//        // use absolute for actual angle
-//        val leftTotal=curr_l_encoder*rightInchesPerTick
-//        val rightTotal=curr_r_encoder*rightInchesPerTick
-//        lastRawAngle=((leftTotal-rightTotal)/turnTrackWidth)
-//        val finalAngleRad=lastRawAngle+angleRadBias
-//
-//        // the aux wheel moves when we rotate, so cancel this out with a prediction
-//        val aux_prediction=angleIncrement*auxTrackWidth
-//
-//        val yDelta=(lWheelDelta+rWheelDelta)/2.0
-//        val xDelta=aWheelDelta-aux_prediction
-//
-//        DrivePosition.updatePos(Pose(xDelta,yDelta,angleIncrement),Angle.createUnwrappedRad(finalAngleRad))
-//
-//        last_l_encoder=curr_l_encoder
-//        last_r_encoder=curr_r_encoder
-//        last_a_encoder=curr_a_encoder
-//        }
-//
-//        override fun setAngleRad(angle_rad:Double){
-//        angleRadBias=angle_rad-lastRawAngle
-//        }
-//
-//        fun addAngleRad(angle_rad:Double){
-//        angleRadBias+=angle_rad
-//        }
-//
-//        override fun addAngleBias(angle_rad:Double){
-//        angleRadBias+=angle_rad
-//        }
-//}
-//*/
