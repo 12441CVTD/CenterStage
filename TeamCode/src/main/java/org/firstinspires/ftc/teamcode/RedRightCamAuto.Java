@@ -81,7 +81,7 @@ public class RedRightCamAuto extends LinearOpMode {
     // private DcMotor bR = null;
     private ElapsedTime runtime = new ElapsedTime();
     OpenCvWebcam webcam;
-    pictureTimeBlue pipeline;
+    pictureTimeRed pipeline;
 
     @Override
     public void runOpMode() {
@@ -105,7 +105,7 @@ public class RedRightCamAuto extends LinearOpMode {
         // bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new pictureTimeBlue();
+        pipeline = new pictureTimeRed();
         webcam.setPipeline(pipeline);
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
