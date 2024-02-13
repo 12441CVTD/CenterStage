@@ -30,25 +30,14 @@
 
 //package org.firstinspires.ftc.robotcontroller.external.samples;
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.teamcode.pictureTimeRed;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
+
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 /*
@@ -70,9 +59,8 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="ANDROID STUDDDIO RED RIGHThis is for idiot babies", group="Robot")
-
-public class RedRightCamAuto extends LinearOpMode {
+@Autonomous
+public class blueCamClose extends LinearOpMode {
 
     /* Declare OpMode members. */
     // private DcMotor fL = null;
@@ -81,7 +69,7 @@ public class RedRightCamAuto extends LinearOpMode {
     // private DcMotor bR = null;
     private ElapsedTime runtime = new ElapsedTime();
     OpenCvWebcam webcam;
-    pictureTimeRed pipeline;
+    pictureTimeBlue pipeline;
 
     @Override
     public void runOpMode() {
@@ -105,7 +93,7 @@ public class RedRightCamAuto extends LinearOpMode {
         // bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new pictureTimeRed();
+        pipeline = new pictureTimeBlue();
         webcam.setPipeline(pipeline);
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
