@@ -34,7 +34,7 @@ import org.openftc.easyopencv.OpenCvPipeline;
  * 100% accurate) method of detecting the skystone when lined up with
  * the sample regions over the first 3 stones.
  */
-public class pictureTimeBlue extends OpenCvPipeline
+public class pictureTimeRed extends OpenCvPipeline
 {
     /*
      * An enum to define the skystone position
@@ -99,7 +99,7 @@ public class pictureTimeBlue extends OpenCvPipeline
     void inputToCb(Mat input)
     {
         Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
-        Core.extractChannel(YCrCb, Cb, 2);
+        Core.extractChannel(YCrCb, Cb, 1);
     }
 
     @Override

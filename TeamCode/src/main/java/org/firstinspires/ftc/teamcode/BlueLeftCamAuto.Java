@@ -28,18 +28,29 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+//package org.firstinspires.ftc.robotcontroller.external.samples;
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.pictureTimeBlue;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 /*
  * This OpMode illustrates the concept of driving a path based on time.
  * The code is structured as a LinearOpMode
@@ -59,39 +70,39 @@ import org.openftc.easyopencv.OpenCvWebcam;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@Autonomous(name="RIGHT REThis is for idiot babies", group="Robot")
+@Autonomous(name="ANDROID STUDDDIO BLUE LEFThis is for idiot babies", group="Robot")
 
-public class RedRightAuto extends LinearOpMode {
+public class BlueLeftCamAuto extends LinearOpMode {
 
     /* Declare OpMode members. */
-    private DcMotor fL = null;
-    private DcMotor fR = null;
-    private DcMotor bL = null;
-    private DcMotor bR = null;
-    private ElapsedTime     runtime = new ElapsedTime();
+    // private DcMotor fL = null;
+    // private DcMotor fR = null;
+    // private DcMotor bL = null;
+    // private DcMotor bR = null;
+    private ElapsedTime runtime = new ElapsedTime();
     OpenCvWebcam webcam;
     pictureTimeBlue pipeline;
-    
+
     @Override
     public void runOpMode() {
 
         // Initialize the drive system variables.
-        fL  = hardwareMap.get(DcMotor.class, "fL");
-        fR  = hardwareMap.get(DcMotor.class, "fR");
-        bL  = hardwareMap.get(DcMotor.class, "bL");
-        bR  = hardwareMap.get(DcMotor.class, "bR");
+        // fL  = hardwareMap.get(DcMotor.class, "fL");
+        // fR  = hardwareMap.get(DcMotor.class, "fR");
+        // bL  = hardwareMap.get(DcMotor.class, "bL");
+        // bR  = hardwareMap.get(DcMotor.class, "bR");
 
         // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
         // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
         // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        fL.setDirection(DcMotor.Direction.FORWARD);
-        fR.setDirection(DcMotor.Direction.REVERSE);
-        bL.setDirection(DcMotor.Direction.FORWARD);
-        bR.setDirection(DcMotor.Direction.REVERSE);
-        fL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // fL.setDirection(DcMotor.Direction.FORWARD);
+        // fR.setDirection(DcMotor.Direction.REVERSE);
+        // bL.setDirection(DcMotor.Direction.FORWARD);
+        // bR.setDirection(DcMotor.Direction.REVERSE);
+        // fL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        // bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new pictureTimeBlue();
@@ -99,9 +110,10 @@ public class RedRightAuto extends LinearOpMode {
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
         telemetry.update();
+
+        // Wait for the game to start (driver presses PLAY)
         webcam.setMillisecondsPermissionTimeout(2500);
-        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
-        {
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener(){
             @Override
             public void onOpened()
             {
@@ -117,68 +129,41 @@ public class RedRightAuto extends LinearOpMode {
                 telemetry.addData("erroCode", errorCode);
             }
         });
-
-
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
-
-        driveWay(0.6,-0.6,-0.6,0.6, 1000);
-        driveWay(-0.4,0.4,0.4,-0.4, 200);
-//front left, back right, positive right
-        fL.setPower(0);
-        fR.setPower(0);
-        bL.setPower(0);
-        bR.setPower(0);
+        // telemetry.addData("Analysis", pipeline.getAnalysis());
+        // telemetry.update();
+        int barkAndBark = pipeline.getAnalysis();
+        if(barkAndBark == 1) {
+            telemetry.addData("works", 1);
+        }
+        if(barkAndBark == 2) {
+            telemetry.addData("works", 2);
+        }
+        if(barkAndBark == 3) {
+            telemetry.addData("works", 3);
+        }
+        if(barkAndBark == 0) {
+            telemetry.addData("broke", 0);
+        }
+        telemetry.update();
+        //driveWay(-0.6,0.6,0.6,-0.6, 1000);
+        //driveWay(0.4,-0.4,-0.4,0.4, 200);
+        // fL.setPower(0);
+        // fR.setPower(0);
+        // bL.setPower(0);
+        // bR.setPower(0);
     }
-    public void driveWay(double lF, double rF, double lB, double rB, double s){
+    public void driveWay(double lF, double rF, double lB, double rB, int s){
         runtime.reset();
         while(opModeIsActive() && (runtime.milliseconds() < s)){
-            fL.setPower(lF);
-            fR.setPower(rF);
-            bL.setPower(lB);
-            bR.setPower(rB);
+            // fL.setPower(lF);
+            // fR.setPower(rF);
+            // bL.setPower(lB);
+            // bR.setPower(rB);
         }
-        fL.setPower(0);
-        fR.setPower(0);
-        bL.setPower(0);
-        bR.setPower(0);
+        // fL.setPower(0);
+        // fR.setPower(0);
+        // bL.setPower(0);
+        // bR.setPower(0);
     }
 }
-/*package org.firstinspires.ftc.robotcontroller.external.samples;
-
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-
-private DcMotor fl = null;
-private DcMotor fr = null;
-private DcMotor bl= null;
-private DcMotor br = null;
-
- private ElapsedTime     runtime = new ElapsedTime();
-
-//    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;
-//    static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;
-//    static final double     WHEEL_DIAMETER_INCHES   = 1.75 ;
-//    static final double     COUNTS_PER_INCH         = (261.92);
-//    static final double     DRIVE_SPEED             = 0.6;
-//    static final double     TURN_SPEED              = 0.5;
-//    134-139 lines need to be adjusted
-
-
-  @Override
-    public void runOpMode() {
-fl = hardwareMap.get(DcMotor.class "fl");
-fr = hardwareMap.get(DcMotor.class "fr")
-bl = hardwareMap.get(DcMotor.class "bl");
-br = hardwareMap.get(DcMotor.class "br");
-
-leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
-
- telemetry.addData("Status", "Ready to run");    
-        telemetry.update();
-
-}*/
