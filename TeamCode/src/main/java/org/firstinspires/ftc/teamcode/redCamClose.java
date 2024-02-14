@@ -33,6 +33,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.openftc.easyopencv.OpenCvCamera;
@@ -68,6 +70,19 @@ public class redCamClose extends LinearOpMode {
     // private DcMotor bL = null;
     // private DcMotor bR = null;
     private ElapsedTime runtime = new ElapsedTime();
+    private DcMotor fL = null;
+    private DcMotor fR = null;
+    private DcMotor bL = null;
+    private DcMotor bR = null;
+    private Servo claw = null;
+    private Servo clawTwo = null;
+    private Servo flippyL = null;
+    private Servo flippyR = null;
+    //private Servo turnyL = null;
+    private Servo turnyR = null;
+    private DcMotor armL = null;
+    private DcMotor armR = null;
+    private Servo woosh = null;
     OpenCvWebcam webcam;
     pictureTimeRed pipeline;
 
@@ -75,22 +90,31 @@ public class redCamClose extends LinearOpMode {
     public void runOpMode() {
 
         // Initialize the drive system variables.
-        // fL  = hardwareMap.get(DcMotor.class, "fL");
-        // fR  = hardwareMap.get(DcMotor.class, "fR");
-        // bL  = hardwareMap.get(DcMotor.class, "bL");
-        // bR  = hardwareMap.get(DcMotor.class, "bR");
-
-        // To drive forward, most robots need the motor on one side to be reversed, because the axles point in opposite directions.
-        // When run, this OpMode should start both motors driving forward. So adjust these two lines based on your first test drive.
-        // Note: The settings here assume direct drive on left and right wheels.  Gear Reduction or 90 Deg drives may require direction flips
-        // fL.setDirection(DcMotor.Direction.FORWARD);
-        // fR.setDirection(DcMotor.Direction.REVERSE);
-        // bL.setDirection(DcMotor.Direction.FORWARD);
-        // bR.setDirection(DcMotor.Direction.REVERSE);
-        // fL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        // fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        // bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        // bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fL  = hardwareMap.get(DcMotor.class, "fL");
+        fR = hardwareMap.get(DcMotor.class, "fR");
+        bL  = hardwareMap.get(DcMotor.class, "bL");
+        bR = hardwareMap.get(DcMotor.class, "bR");
+        claw = hardwareMap.get(Servo.class, "claw");
+        clawTwo = hardwareMap.get(Servo.class, "clawTwo");
+        flippyL = hardwareMap.get(Servo.class, "flippyL");
+        flippyR = hardwareMap.get(Servo.class, "flippyR");
+        //turnyL = hardwareMap.get(Servo.class, "turnyL");
+        turnyR = hardwareMap.get(Servo.class, "turnyR");
+        armL = hardwareMap.get(DcMotor.class, "armL");
+        armR = hardwareMap.get(DcMotor.class, "armR");
+        woosh = hardwareMap.get(Servo.class, "woosh");
+        fL.setDirection(DcMotor.Direction.FORWARD);
+        fR.setDirection(DcMotor.Direction.FORWARD);
+        bL.setDirection(DcMotor.Direction.FORWARD);
+        bR.setDirection(DcMotor.Direction.FORWARD);
+        armL.setDirection(DcMotor.Direction.REVERSE);
+        armR.setDirection(DcMotor.Direction.FORWARD);
+        fL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        fR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        bR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        armR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         pipeline = new pictureTimeRed();

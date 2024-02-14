@@ -51,7 +51,6 @@ import com.qualcomm.robotcore.util.Range;
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list
  */
 
-@TeleOp(name="usage ONBOT1, please use", group="Linear OpMode")
 public class Bassoon extends LinearOpMode {
 
     // Declare OpMode members.

@@ -62,7 +62,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
  */
 
 @Autonomous
-public class blueCamClose extends LinearOpMode {
+public class blueCamFar extends LinearOpMode {
 
     /* Declare OpMode members. */
     // private DcMotor fL = null;

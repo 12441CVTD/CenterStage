@@ -62,7 +62,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
  */
 
 @Autonomous
-public class blueCamClose extends LinearOpMode {
+public class redCamFar extends LinearOpMode {
 
     /* Declare OpMode members. */
     // private DcMotor fL = null;
@@ -84,7 +84,7 @@ public class blueCamClose extends LinearOpMode {
     private DcMotor armR = null;
     private Servo woosh = null;
     OpenCvWebcam webcam;
-    pictureTimeBlue pipeline;
+    pictureTimeRed pipeline;
 
     @Override
     public void runOpMode() {
@@ -117,7 +117,7 @@ public class blueCamClose extends LinearOpMode {
         armR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-        pipeline = new pictureTimeBlue();
+        pipeline = new pictureTimeRed();
         webcam.setPipeline(pipeline);
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Status", "Ready to run");    //
