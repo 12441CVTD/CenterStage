@@ -158,24 +158,55 @@ public class redCamClose extends LinearOpMode {
             telemetry.addData("broke", 0);
         }
         telemetry.update();
-        //driveWay(-0.6,0.6,0.6,-0.6, 1000);
-        //driveWay(0.4,-0.4,-0.4,0.4, 200);
-        // fL.setPower(0);
-        // fR.setPower(0);
-        // bL.setPower(0);
-        // bR.setPower(0);
-    }
-    public void driveWay(double lF, double rF, double lB, double rB, int s){
-        runtime.reset();
-        while(opModeIsActive() && (runtime.milliseconds() < s)){
-            // fL.setPower(lF);
-            // fR.setPower(rF);
-            // bL.setPower(lB);
-            // bR.setPower(rB);
+        if(barkAndBark == 1) {
+
+            driveWay(-0.6,0.6,0.6,-0.6, 500);
+            sleep(301);
+            driveWay(0.4,0.4,0.4,0.4, 200);
         }
-        // fL.setPower(0);
-        // fR.setPower(0);
-        // bL.setPower(0);
-        // bR.setPower(0);
+        if(barkAndBark == 2) {
+            driveWay(0.6, 0.6, 0.6, 0.6, 300);
+        }
+        if(barkAndBark == 3) {
+            driveWay(0.6, - 0.6, -0.6, 0.6, 500);
+            sleep(299);
+            driveWay(0.4, 0.4, 0.4, 0.4, 200);
+        }
+        if(barkAndBark == 0) {
+            driveWay(-0.6, 0.6, 0.6, -0.6, 600);
+            sleep(298);
+            driveWay(0.4, -0.4, -0.4, 0.4,200);
+        }
+         fL.setPower(0);
+         fR.setPower(0);
+         bL.setPower(0);
+         bR.setPower(0);
     }
-}
+    public void driveWay(double lF, double rF, double lB, double rB, int s) {
+        runtime.reset();
+        while (opModeIsActive() && (runtime.milliseconds() < s)) {
+            fL.setPower(lF);
+            fR.setPower(rF);
+            bL.setPower(lB);
+            bR.setPower(rB);
+        }
+        fL.setPower(0);
+        fR.setPower(0);
+        bL.setPower(0);
+        bR.setPower(0);
+    }
+    public void GabeLeftToothOpen(){
+        claw.setPosition(0.0);
+    }
+    public void GabeLeftToothClose(){
+        claw.setPosition(1.0);
+    }
+    public void GabeRightToothOpen(){
+        clawTwo.setPosition(0.0);
+    }
+    public void GabeRightToothClose(){
+        clawTwo.setPosition(1.0);
+    }
+
+    }
+
